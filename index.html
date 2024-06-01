@@ -9,31 +9,31 @@
 <body>
 
     <div class="keys">
-        <div data-key="82" data-instance="1" class="key">
+        <div data-key="82" data-instance="1" class="key" data-letter="R" >
             <kbd>R</kbd>
             <span class="sound">clap</span>
         </div>    
-        <div data-key="79" data-instance="1" class="key">
+        <div data-key="79" data-instance="1" class="key" data-letter="O" >
             <kbd>O</kbd>
             <span class="sound">hihat</span>
         </div>
-        <div data-key="68" data-instance="1" class="key">
+        <div data-key="68" data-instance="1" class="key" data-letter="D">
             <kbd>D</kbd>
             <span class="sound">kick</span>
         </div>    
-        <div data-key="82" data-instance="2" class="key">
+        <div data-key="82" data-instance="2" class="key" data-letter="R" >
             <kbd>R</kbd>
             <span class="sound">clap</span>
         </div>    
-        <div data-key="73" data-instance="1" class="key">
+        <div data-key="73" data-instance="1" class="key" data-letter="I">
             <kbd>I</kbd>
             <span class="sound">openhat</span>
         </div>    
-        <div data-key="71" data-instance="1" class="key">
+        <div data-key="71" data-instance="1" class="key" data-letter="G">
             <kbd>G</kbd>
             <span class="sound">boom</span>
         </div> 
-        <div data-key="79" data-instance="2" class="key">
+        <div data-key="79" data-instance="2" class="key" data-letter="O">
             <kbd>O</kbd>
             <span class="sound">hihat</span>
         </div>
@@ -52,6 +52,31 @@
         82: 1, // R
         79: 1  // O
     };
+
+    const keyElements = document.querySelectorAll('.key');
+    console.log('keyElements', keyElements);
+    let currentIndex = 0;
+
+    function showCurrentLetter() {
+        keyElements.forEach((key, index) => {
+            key.style.display = index === currentIndex ? 'block' : 'none';
+        });
+    }
+    console.log('block', showCurrentLetter);
+
+
+    function cycleLetters() {
+        currentIndex = (currentIndex + 1) % keyElements.length;
+        showCurrentLetter();
+    }
+
+    console.log('cycle letters', cycleLetters);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showCurrentLetter(); // Show the first letter initially
+        setInterval(cycleLetters, 2000); // Change letter every second
+    });
+
 
     function playSound(e) {
         let keyNumber = keyState[e.keyCode] || 1;
